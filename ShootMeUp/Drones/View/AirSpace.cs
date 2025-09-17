@@ -48,12 +48,12 @@ namespace Scramble
                 switch (e.KeyCode)
                 {
                     case Keys.Left:
-                        ship.setX(ship.X - 20);
+                        ship.Move = -1;
                         Console.WriteLine("LEft");
                         break;
 
                     case Keys.Right:
-                        ship.setX(ship.X + 20);
+                        ship.Move = 1;
                         Console.WriteLine("Right");
                         break;
 
