@@ -11,8 +11,8 @@ namespace Scramble
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.ship, X,Y,100,40);
-            drawingSpace.Graphics.DrawString("Vous", TextHelpers.drawFont, TextHelpers.writingBrush, X + 30, Y - 25);
+            drawingSpace.Graphics.DrawImage(Resources.ship, X,Y,70,80);
+            drawingSpace.Graphics.DrawString(_name, TextHelpers.drawFont, TextHelpers.writingBrush, X + 30, Y - 25);
         }
 
         // De manière textuelle

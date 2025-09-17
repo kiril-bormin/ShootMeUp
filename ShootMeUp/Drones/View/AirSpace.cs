@@ -1,3 +1,5 @@
+using Scramble;
+
 namespace Scramble
 {
     // La classe AirSpace représente le territoire au dessus duquel les vaisseau peuvent voler
@@ -14,7 +16,7 @@ namespace Scramble
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
         int[] ground = new int[WIDTH / 10+1];
-        Brush groundBrush = new SolidBrush(Color.DarkGreen);
+        Brush groundBrush = new SolidBrush(Color.Blue);
         int scrollSmoother = 0;
 
         // Initialisation de l'espace aérien avec un certain nombre de ships
@@ -33,8 +35,34 @@ namespace Scramble
                 ground[i] = ground[i-1] + GlobalHelpers.alea.Next(0, 7)-3;
             }
             ClientSize = new Size(WIDTH, HEIGHT);
+            InitializeComponent();
+
+            this.KeyPreview = true; // Ensures the form captures key events before child controls
+            this.KeyDown += Form1_KeyDown;
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (Joueur ship in fleet)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left:
+                        ship.setX(ship.X - 20);
+                        Console.WriteLine("LEft");
+                        break;
+
+                    case Keys.Right:
+                        ship.setX(ship.X + 20);
+                        Console.WriteLine("Right");
+                        break;
+
+                    case Keys.Escape:
+                        this.Close();
+                        break;
+                }
+            }
+        }
         // Affichage de la situation actuelle
         private void Render()
         {
