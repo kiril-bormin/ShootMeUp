@@ -63,9 +63,29 @@ namespace Scramble.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fond {
+            get {
+                object obj = ResourceManager.GetObject("fond", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ship {
             get {
                 object obj = ResourceManager.GetObject("ship", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ship_left {
+            get {
+                object obj = ResourceManager.GetObject("ship_left", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

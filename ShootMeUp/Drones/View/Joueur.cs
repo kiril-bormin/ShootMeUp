@@ -11,7 +11,18 @@ namespace Scramble
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(Resources.ship, X,Y,70,80);
+            if (Move == 3) 
+            {
+                drawingSpace.Graphics.DrawImage(Resources.ship_right, X, Y, 48, 57);//largeur, hauteur 47, 56 (taille compatible avec ship)
+            }
+            else if (Move == -3)
+            {
+                drawingSpace.Graphics.DrawImage(Resources.ship_left, X, Y, 37, 44);//37, 44 valeurs par défaut (taille d'image en pixels / 10)
+            }
+            else
+            {
+                drawingSpace.Graphics.DrawImage(Resources.ship, X, Y, 48, 61);//48, 61 valeurs par défaut, multiplié par 1,3 pour avoir un bon taille
+            }
             drawingSpace.Graphics.DrawString(_name, TextHelpers.drawFont, TextHelpers.writingBrush, X + 30, Y - 25);
         }
 

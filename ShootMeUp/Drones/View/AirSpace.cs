@@ -1,4 +1,5 @@
 using Scramble;
+using Scramble.Properties;
 
 namespace Scramble
 {
@@ -30,10 +31,10 @@ namespace Scramble
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
             ground[0] = HEIGHT / 5;
-            for (int i = 1; i < ground.Length; i++)
-            {
-                ground[i] = ground[i-1] + GlobalHelpers.alea.Next(0, 7)-3;
-            }
+            //for (int i = 1; i < ground.Length; i++)
+            //{
+            //    ground[i] = ground[i-1] + GlobalHelpers.alea.Next(0, 7)-3;
+            //}
             ClientSize = new Size(WIDTH, HEIGHT);
             InitializeComponent();
 
@@ -48,13 +49,17 @@ namespace Scramble
                 switch (e.KeyCode)
                 {
                     case Keys.Left:
-                        ship.Move = -1;
+                        ship.Move = -3;
                         Console.WriteLine("LEft");
                         break;
 
                     case Keys.Right:
-                        ship.Move = 1;
+                        ship.Move = 3;
                         Console.WriteLine("Right");
+                        break;
+                    case Keys.Up:
+                        ship.Move = 0;
+                        Console.WriteLine("Up");
                         break;
 
                     case Keys.Escape:
@@ -66,7 +71,9 @@ namespace Scramble
         // Affichage de la situation actuelle
         private void Render()
         {
-            airspace.Graphics.Clear(Color.AliceBlue);
+            //fond du jeu
+            //airspace.Graphics.Clear(Color.AliceBlue);
+            airspace.Graphics.DrawImage(Resources.fond, 0, 0, WIDTH, HEIGHT);
 
             // draw ships
             foreach (Joueur ship in fleet)
