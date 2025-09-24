@@ -9,6 +9,8 @@
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
         private int _move;
+        private const int HEIGHT = 79;
+        private const int WIDTH = 62;
 
         // Constructeur
         public Joueur(int x, int y, string name)
@@ -31,7 +33,16 @@
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers la gauche ou la droite
+            _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            Console.WriteLine(Y);
+            if (_y >= 886)
+            {
+                _y -=2;
+            }
+            else if (_y <= 874)
+            {
+                _y +=2;
+            }
             _tanklevel--;                                  // Il a dépensé de l'énergie
             _x += Move;
         }

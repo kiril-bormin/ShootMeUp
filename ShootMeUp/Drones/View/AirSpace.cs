@@ -49,12 +49,12 @@ namespace Scramble
                 switch (e.KeyCode)
                 {
                     case Keys.Left:
-                        ship.Move = -3;
+                        ship.Move = -4;
                         Console.WriteLine("LEft");
                         break;
 
                     case Keys.Right:
-                        ship.Move = 3;
+                        ship.Move = 4;
                         Console.WriteLine("Right");
                         break;
                     case Keys.Up:
@@ -80,17 +80,16 @@ namespace Scramble
             {
                 ship.Render(airspace);
             }
-            for (int i = 0; i < ground.Length; i++)
-            {
-                airspace.Graphics.FillRectangle(groundBrush, new Rectangle(i * 10-scrollSmoother, HEIGHT - ground[i], 10, ground[i]));
-            }
-            scrollSmoother = (scrollSmoother + 5) % 10;
-            if (scrollSmoother == 0)
-            {
-                for (int i = 1;i < ground.Length; i++) ground[i-1] = ground[i];
-                ground[ground.Length - 1] = ground[ground.Length - 2] + GlobalHelpers.alea.Next(0, 7) - 3;
-            }
-
+            //for (int i = 0; i < ground.Length; i++)
+            //{
+            //    airspace.Graphics.FillRectangle(groundBrush, new Rectangle(i * 10-scrollSmoother, HEIGHT - ground[i], 10, ground[i]));
+            //}
+            //scrollSmoother = (scrollSmoother + 5) % 10;
+            //if (scrollSmoother == 0)
+            //{
+            //    for (int i = 1;i < ground.Length; i++) ground[i-1] = ground[i];
+            //    ground[ground.Length - 1] = ground[ground.Length - 2] + GlobalHelpers.alea.Next(0, 7) - 3;
+            //}
             airspace.Render();
         }
 
