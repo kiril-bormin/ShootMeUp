@@ -34,7 +34,7 @@
         public void Update(int interval)
         {
             _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            Console.WriteLine(Y);
+            Console.WriteLine(X);
             if (_y >= 886)
             {
                 _y -=2;
@@ -43,8 +43,21 @@
             {
                 _y +=2;
             }
-            _tanklevel--;                                  // Il a dépensé de l'énergie
-            _x += Move;
+            _tanklevel--; // Il a dépensé de l'énergie
+            if (_x <= 8)
+            {
+                Move = 0;
+                _x += 2;
+            }
+            if (_x >= AirSpace.WIDTH - WIDTH - 8)
+            {
+                Move = 0;
+                _x -= 2;
+            }
+            else
+            {
+                _x += Move;
+            }
         }
     }
 }

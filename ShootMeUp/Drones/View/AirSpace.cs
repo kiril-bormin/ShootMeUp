@@ -52,7 +52,6 @@ namespace Scramble
                         ship.Move = -4;
                         Console.WriteLine("LEft");
                         break;
-
                     case Keys.Right:
                         ship.Move = 4;
                         Console.WriteLine("Right");
@@ -61,7 +60,6 @@ namespace Scramble
                         ship.Move = 0;
                         Console.WriteLine("Up");
                         break;
-
                     case Keys.Escape:
                         this.Close();
                         break;
