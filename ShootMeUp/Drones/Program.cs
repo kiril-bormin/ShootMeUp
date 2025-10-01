@@ -1,4 +1,4 @@
-namespace Scramble
+namespace ShootMeUp
 {
     internal static class Program
     {
@@ -13,11 +13,14 @@ namespace Scramble
             ApplicationConfiguration.Initialize();
 
             // Création de la flotte de ships
-            List<Joueur> fleet = new List<Joueur>();
-            fleet.Add(new Joueur(AirSpace.WIDTH / 2 - 40, 880, "Joe"));
+            List<Player> fleet = new List<Player>();
+            fleet.Add(new Player(AirSpace.WIDTH / 2 - 40, 880, "Joe"));
+
+            List<Enemy> enemy = new List<Enemy>();
+            enemy.Add(new Enemy(AirSpace.WIDTH / 2 - 40, 100, "Test"));
 
             // Démarrage
-            Application.Run(new AirSpace(fleet));
+            Application.Run(new AirSpace(fleet, enemy));
         }
     }
 }

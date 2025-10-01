@@ -1,7 +1,7 @@
-using Scramble;
-using Scramble.Properties;
+using ShootMeUp;
+using ShootMeUp.Properties;
 
-namespace Scramble
+namespace ShootMeUp
 {
     // La classe AirSpace représente le territoire au dessus duquel les vaisseau peuvent voler
     // Il s'agit d'un formulaire (une fenêtre) qui montre une vue 2D depuis le coté
@@ -12,7 +12,8 @@ namespace Scramble
         public static readonly int HEIGHT = 1000;
 
         // La flotte est l'ensemble des ships qui évoluent dans notre espace aérien
-        private List<Joueur> fleet;
+        private List<Player> fleet;
+        private List<Enemy> enemy;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -21,7 +22,7 @@ namespace Scramble
         int scrollSmoother = 0;
 
         // Initialisation de l'espace aérien avec un certain nombre de ships
-        public AirSpace(List<Joueur> fleet)
+        public AirSpace(List<Player> fleet, List<Enemy> enemy)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -29,7 +30,6 @@ namespace Scramble
             // Creates a BufferedGraphics instance associated with this form, and with
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
-            this.fleet = fleet;
             ground[0] = HEIGHT / 5;
             //for (int i = 1; i < ground.Length; i++)
             //{
@@ -40,11 +40,13 @@ namespace Scramble
 
             this.KeyPreview = true; // Ensures the form captures key events before child controls
             this.KeyDown += Form1_KeyDown;
+            this.fleet = fleet;
+            this.enemy = enemy;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            foreach (Joueur ship in fleet)
+            foreach (Player ship in fleet)
             {
                 switch (e.KeyCode)
                 {
@@ -74,9 +76,13 @@ namespace Scramble
             airspace.Graphics.DrawImage(Resources.fond, 0, 0, WIDTH, HEIGHT);
 
             // draw ships
-            foreach (Joueur ship in fleet)
+            foreach (Player ship in fleet)
             {
                 ship.Render(airspace);
+            }
+            foreach (Enemy enemy_ship in enemy)
+            {
+                enemy_ship.Render(airspace);
             }
             //for (int i = 0; i < ground.Length; i++)
             //{
@@ -94,7 +100,7 @@ namespace Scramble
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
-            foreach (Joueur ship in fleet)
+            foreach (Player ship in fleet)
             {
                 ship.Update(interval);
             }

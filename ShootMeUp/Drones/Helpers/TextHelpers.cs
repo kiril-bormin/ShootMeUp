@@ -1,4 +1,4 @@
-﻿namespace Scramble.Helpers
+﻿namespace ShootMeUp.Helpers
 {
     // Outils pour écrire du texte dans un environnement graphique
     internal static class TextHelpers

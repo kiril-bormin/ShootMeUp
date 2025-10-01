@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scramble
+namespace ShootMeUp
 {
     internal static class GlobalHelpers
     {

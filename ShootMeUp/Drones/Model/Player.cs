@@ -1,7 +1,7 @@
-﻿namespace Scramble
+﻿namespace ShootMeUp
 {
     // Cette partie de la classe ship définit ce qu'est un ship par un modèle numérique
-    public partial class Joueur
+    public partial class Player
     {
         public static readonly int FULLTANK = 1000;   // Charge maximale de la batterie
         private int _tanklevel;                            // La charge actuelle de la batterie
@@ -13,7 +13,7 @@
         private const int WIDTH = 62;
 
         // Constructeur
-        public Joueur(int x, int y, string name)
+        public Player(int x, int y, string name)
         {
             Move = 0;
             _x = x;

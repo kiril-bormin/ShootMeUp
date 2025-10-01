@@ -1,11 +1,11 @@
-﻿using Scramble.Helpers;
-using Scramble.Properties;
+﻿using ShootMeUp.Helpers;
+using ShootMeUp.Properties;
 
-namespace Scramble
+namespace ShootMeUp
 {
     // Cette partie de la classe Ship définit comment on peut voir un vaisseau
 
-    public partial class Joueur
+    public partial class Player
     {
 
         // De manière graphique

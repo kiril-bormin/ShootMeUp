@@ -1,4 +1,4 @@
-﻿namespace Scramble
+﻿namespace ShootMeUp
 {
     partial class AirSpace
     {
