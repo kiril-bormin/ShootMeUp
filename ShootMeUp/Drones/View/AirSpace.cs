@@ -55,19 +55,16 @@ namespace ShootMeUp
                 {
                     case Keys.Left:
                         ship.Move = -4;
-                        Console.WriteLine("LEft");
                         break;
                     case Keys.Right:
                         ship.Move = 4;
-                        Console.WriteLine("Right");
                         break;
                     case Keys.Up:
                         ship.Move = 0;
-                        Console.WriteLine("Up");
                         break;
                     case Keys.Space:
-                        missile.Add(new Missile(ship.X, ship.Y));
-                        Console.WriteLine("Fire" + ship.X);
+                        missile.Add(new Missile(ship.X + 24, ship.Y));
+                        ship.Chargesnow--;
                         break;
                     case Keys.Escape:
                         this.Close();

@@ -3,8 +3,8 @@
     // Cette partie de la classe ship définit ce qu'est un ship par un modèle numérique
     public partial class Player
     {
-        public static readonly int FULLTANK = 1000;   // Charge maximale de la batterie
-        private int _tanklevel;                            // La charge actuelle de la batterie
+        public int CHARGES = 5;   // Charge maximale de la batterie
+        private int _chargesnow;                            // La charge actuelle de la batterie
         private string _name;                           // Un nom
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
@@ -22,7 +22,7 @@
             _x = x;
             _y = y;
             _name = name;
-            _tanklevel = GlobalHelpers.alea.Next(FULLTANK); // La charge initiale de la batterie est choisie aléatoirement
+            _chargesnow = GlobalHelpers.alea.Next(CHARGES); // La charge initiale de la batterie est choisie aléatoirement
         }
         public int X { get { return _x;} }
         public int Y { get { return _y;} }
@@ -32,6 +32,7 @@
 
         public int Move { get => _move; set => _move = value; }
         public int Fire { get => _fire; set => _fire = value; }
+        public int Chargesnow { get => _chargesnow; set => _chargesnow = value; }
 
         // Cette méthode calcule le nouvel état dans lequel le ship se trouve après
         // que 'interval' millisecondes se sont écoulées
@@ -46,7 +47,7 @@
             {
                 _y +=2;
             }
-            _tanklevel--; // Il a dépensé de l'énergie
+             // Il a dépensé de l'énergie
             if (_x <= 8)
             {
                 Move = 0;

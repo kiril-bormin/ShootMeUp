@@ -37,7 +37,6 @@ namespace ShootMeUp
         public void Update(int interval)
         {
             _x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            Console.WriteLine(Y);
             _y += 4;
         }
     }

@@ -29,7 +29,7 @@ namespace ShootMeUp
         // De manière textuelle
         public override string ToString()
         {
-            return $"{Name} ({((int)((double)_tanklevel / FULLTANK * 100)).ToString()}%)";
+            return $"{Name} ({((int)((double)_chargesnow / CHARGES * 100)).ToString()}%)";
         }
 
     }
