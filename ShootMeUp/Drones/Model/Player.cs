@@ -9,12 +9,15 @@
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
         private int _move;
+        private int _fire;
         private const int HEIGHT = 79;
         private const int WIDTH = 62;
+
 
         // Constructeur
         public Player(int x, int y, string name)
         {
+            Fire = 0;
             Move = 0;
             _x = x;
             _y = y;
@@ -28,13 +31,13 @@
         public string Name { get { return _name;} }
 
         public int Move { get => _move; set => _move = value; }
+        public int Fire { get => _fire; set => _fire = value; }
 
         // Cette méthode calcule le nouvel état dans lequel le ship se trouve après
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
             _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            Console.WriteLine(X);
             if (_y >= 886)
             {
                 _y -=2;
@@ -58,6 +61,7 @@
             {
                 _x += Move;
             }
+
         }
     }
 }

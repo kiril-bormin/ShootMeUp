@@ -1,5 +1,6 @@
 using ShootMeUp;
 using ShootMeUp.Properties;
+using System.Reflection;
 
 namespace ShootMeUp
 {
@@ -14,6 +15,7 @@ namespace ShootMeUp
         // La flotte est l'ensemble des ships qui évoluent dans notre espace aérien
         private List<Player> fleet;
         private List<Enemy> enemy;
+        private List<Missile> missile;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -22,7 +24,7 @@ namespace ShootMeUp
         int scrollSmoother = 0;
 
         // Initialisation de l'espace aérien avec un certain nombre de ships
-        public AirSpace(List<Player> fleet, List<Enemy> enemy)
+        public AirSpace(List<Player> fleet, List<Enemy> enemy, List<Missile> missile)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -41,6 +43,7 @@ namespace ShootMeUp
             this.KeyPreview = true; // Ensures the form captures key events before child controls
             this.KeyDown += Form1_KeyDown;
             this.fleet = fleet;
+            this.missile = missile;
             this.enemy = enemy;
         }
 
@@ -61,6 +64,10 @@ namespace ShootMeUp
                     case Keys.Up:
                         ship.Move = 0;
                         Console.WriteLine("Up");
+                        break;
+                    case Keys.Space:
+                        missile.Add(new Missile(ship.X, ship.Y));
+                        Console.WriteLine("Fire" + ship.X);
                         break;
                     case Keys.Escape:
                         this.Close();
@@ -84,6 +91,10 @@ namespace ShootMeUp
             {
                 enemy_ship.Render(airspace);
             }
+            foreach (Missile missile in missile)
+            {
+                missile.Render(airspace);
+            }
             //for (int i = 0; i < ground.Length; i++)
             //{
             //    airspace.Graphics.FillRectangle(groundBrush, new Rectangle(i * 10-scrollSmoother, HEIGHT - ground[i], 10, ground[i]));
@@ -103,6 +114,14 @@ namespace ShootMeUp
             foreach (Player ship in fleet)
             {
                 ship.Update(interval);
+            }
+            foreach (Enemy enemy_ship in enemy)
+            {
+                enemy_ship.Update(interval);
+            }
+            foreach (Missile missile in missile)
+            {
+                missile.Update(interval);
             }
         }
 

@@ -1,3 +1,6 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
 namespace ShootMeUp
 {
     internal static class Program
@@ -17,10 +20,12 @@ namespace ShootMeUp
             fleet.Add(new Player(AirSpace.WIDTH / 2 - 40, 880, "Joe"));
 
             List<Enemy> enemy = new List<Enemy>();
-            enemy.Add(new Enemy(AirSpace.WIDTH / 2 - 40, 100, "Test"));
+            enemy.Add(new Enemy(AirSpace.WIDTH / 2 - 40, 100, "F16"));
+
+            List<Missile> missile = new List<Missile>();
 
             // Démarrage
-            Application.Run(new AirSpace(fleet, enemy));
+            Application.Run(new AirSpace(fleet, enemy, missile));
         }
     }
 }
