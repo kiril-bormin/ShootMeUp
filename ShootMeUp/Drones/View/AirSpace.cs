@@ -71,14 +71,14 @@ namespace ShootMeUp
                     case Keys.Space:
                         if (ship.Chargesnow >= 1)
                         {
-                            missile.Add(new Missile(ship.X + 24, ship.Y));
+                             missile.Add(new Missile(ship.X + 24, ship.Y));
                             ship.Chargesnow--;
                         }
                         else
                         {
 
                         }
-                            break;
+                        break;
                     case Keys.Escape:
                         this.Close();
                         break;
@@ -101,15 +101,19 @@ namespace ShootMeUp
             {
                 enemy_ship.Render(airspace);
             }
-            foreach (Missile missile in missile)
+            for (int i = missile.Count - 1; i >= 0; i--)
             {
-                missile.Render(airspace);
-                //if (missile.Y <= -10) {
-                //    missile.Dispose();
-                //}
+                if (missile[i].Update(1)) 
+                {
+                    missile.RemoveAt(i);
+                }
+                else
+                {
+                    missile[i].Render(airspace);
+                }
             }
-            Interface(airspace);
 
+            Interface(airspace);
 
 
             //for (int i = 0; i < ground.Length; i++)
@@ -157,7 +161,7 @@ namespace ShootMeUp
         {
             foreach (Player ship in fleet)
             {
-                drawingSpace.Graphics.DrawString("Nombre de missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
+                drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
             }
         }
         // Méthode appelée à chaque frame

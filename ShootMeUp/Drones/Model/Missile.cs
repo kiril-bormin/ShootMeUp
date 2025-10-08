@@ -26,12 +26,13 @@ namespace ShootMeUp
         public void setX(int x) { _x = x; }
         public void setY(int y) { _y = y; }
 
-        public void Update(int interval)
+        public bool Update(int interval)
         {
             //_x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            _y -= 7;
+            _y -= 8;
             Console.WriteLine(_y);
-        
+
+            return _y <= -HEIGHT;
         }
     }
 }
