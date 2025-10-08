@@ -1,4 +1,7 @@
-﻿namespace ShootMeUp
+﻿using System.Diagnostics.Metrics;
+using System.Windows.Forms;
+
+namespace ShootMeUp
 {
     // Cette partie de la classe ship définit ce qu'est un ship par un modèle numérique
     public partial class Player
@@ -22,7 +25,7 @@
             _x = x;
             _y = y;
             _name = name;
-            _chargesnow = GlobalHelpers.alea.Next(CHARGES); // La charge initiale de la batterie est choisie aléatoirement
+            _chargesnow = CHARGES; // La charge initiale de la batterie est choisie aléatoirement
         }
         public int X { get { return _x;} }
         public int Y { get { return _y;} }
@@ -38,6 +41,7 @@
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
+            Console.WriteLine(_chargesnow);
             _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             if (_y >= 886)
             {

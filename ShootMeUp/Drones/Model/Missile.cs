@@ -3,6 +3,7 @@ using ShootMeUp.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -29,6 +30,8 @@ namespace ShootMeUp
         {
             //_x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _y -= 7;
+            Console.WriteLine(_y);
+        
         }
     }
 }

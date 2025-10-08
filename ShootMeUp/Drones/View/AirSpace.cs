@@ -1,6 +1,10 @@
 using ShootMeUp;
+using ShootMeUp.Helpers;
 using ShootMeUp.Properties;
+using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ShootMeUp
 {
@@ -16,6 +20,7 @@ namespace ShootMeUp
         private List<Player> fleet;
         private List<Enemy> enemy;
         private List<Missile> missile;
+        private int counter = 0;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -33,6 +38,7 @@ namespace ShootMeUp
             // dimensions the same size as the drawing surface of the form.
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             ground[0] = HEIGHT / 5;
+
             //for (int i = 1; i < ground.Length; i++)
             //{
             //    ground[i] = ground[i-1] + GlobalHelpers.alea.Next(0, 7)-3;
@@ -63,9 +69,16 @@ namespace ShootMeUp
                         ship.Move = 0;
                         break;
                     case Keys.Space:
-                        missile.Add(new Missile(ship.X + 24, ship.Y));
-                        ship.Chargesnow--;
-                        break;
+                        if (ship.Chargesnow >= 1)
+                        {
+                            missile.Add(new Missile(ship.X + 24, ship.Y));
+                            ship.Chargesnow--;
+                        }
+                        else
+                        {
+
+                        }
+                            break;
                     case Keys.Escape:
                         this.Close();
                         break;
@@ -91,7 +104,14 @@ namespace ShootMeUp
             foreach (Missile missile in missile)
             {
                 missile.Render(airspace);
+                //if (missile.Y <= -10) {
+                //    missile.Dispose();
+                //}
             }
+            Interface(airspace);
+
+
+
             //for (int i = 0; i < ground.Length; i++)
             //{
             //    airspace.Graphics.FillRectangle(groundBrush, new Rectangle(i * 10-scrollSmoother, HEIGHT - ground[i], 10, ground[i]));
@@ -111,6 +131,17 @@ namespace ShootMeUp
             foreach (Player ship in fleet)
             {
                 ship.Update(interval);
+                if (counter % 50 == 0)
+                {
+                    if (ship.Chargesnow >= 5)
+                    { 
+                    
+                    }
+                    else
+                    {
+                        ship.Chargesnow++;
+                    }
+                }
             }
             foreach (Enemy enemy_ship in enemy)
             {
@@ -120,13 +151,22 @@ namespace ShootMeUp
             {
                 missile.Update(interval);
             }
-        }
 
+        }
+        private void Interface(BufferedGraphics drawingSpace)
+        {
+            foreach (Player ship in fleet)
+            {
+                drawingSpace.Graphics.DrawString("Nombre de missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
+            }
+        }
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)
         {
+            counter++;
             this.Update(ticker.Interval);
             this.Render();
+
         }
     }
 }
