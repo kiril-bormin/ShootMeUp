@@ -97,13 +97,24 @@ namespace ShootMeUp
             {
                 ship.Render(airspace);
             }
-            foreach (Enemy enemy_ship in enemy)
+            //foreach (Enemy enemy_ship in enemy)
+            //{
+            //    enemy_ship.Render(airspace);
+            //}
+            for (int i = enemy.Count - 1; i >= 0; i--)
             {
-                enemy_ship.Render(airspace);
+                if (enemy[i].Update(16))
+                {
+                    enemy.RemoveAt(i);
+                }
+                else
+                {
+                    enemy[i].Render(airspace);
+                }
             }
             for (int i = missile.Count - 1; i >= 0; i--)
             {
-                if (missile[i].Update(1)) 
+                if (missile[i].Update(16)) 
                 {
                     missile.RemoveAt(i);
                 }

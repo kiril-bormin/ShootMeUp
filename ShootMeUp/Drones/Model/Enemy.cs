@@ -34,10 +34,13 @@ namespace ShootMeUp
 
         // Cette méthode calcule le nouvel état dans lequel le ship se trouve après
         // que 'interval' millisecondes se sont écoulées
-        public void Update(int interval)
+        public bool Update(int interval)
         {
             _x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _y += 4;
+            Console.WriteLine(_y);
+            return _y >= AirSpace.HEIGHT + HEIGHT;
+            
         }
     }
 }
