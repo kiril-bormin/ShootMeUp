@@ -11,8 +11,8 @@ namespace ShootMeUp
         private string _name;                           // Un nom
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
-        private int _move;
-        private int _fire;
+        private int _move;                              // Permet de définir la vitesse de déplacement de l'avion
+        private int _fire;                              //
         private const int HEIGHT = 79;
         private const int WIDTH = 62;
 
@@ -51,7 +51,7 @@ namespace ShootMeUp
             {
                 _y +=2;
             }
-             // Il a dépensé de l'énergie
+
             if (_x <= 8)
             {
                 Move = 0;
@@ -64,7 +64,7 @@ namespace ShootMeUp
             }
             else
             {
-                _x += Move;
+                _x += Move; //déplacement de l'avion en horizontal
             }
 
         }

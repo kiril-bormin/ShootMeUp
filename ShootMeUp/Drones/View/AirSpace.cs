@@ -101,9 +101,9 @@ namespace ShootMeUp
             //{
             //    enemy_ship.Render(airspace);
             //}
-            for (int i = enemy.Count - 1; i >= 0; i--)
+            for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors écran
             {
-                if (enemy[i].Update(16))
+                if (enemy[i].Update(32))
                 {
                     enemy.RemoveAt(i);
                 }
@@ -112,9 +112,9 @@ namespace ShootMeUp
                     enemy[i].Render(airspace);
                 }
             }
-            for (int i = missile.Count - 1; i >= 0; i--)
+            for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors écran
             {
-                if (missile[i].Update(16)) 
+                if (missile[i].Update(32)) 
                 {
                     missile.RemoveAt(i);
                 }

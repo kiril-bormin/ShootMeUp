@@ -38,9 +38,7 @@ namespace ShootMeUp
         {
             _x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _y += 4;
-            Console.WriteLine(_y);
             return _y >= AirSpace.HEIGHT + HEIGHT;
-            
         }
     }
 }
