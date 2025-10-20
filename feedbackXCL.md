@@ -18,3 +18,28 @@
 - Le nommage des commits est parfait maintenant
 - Le code avance bien
 - Par contre le rapport est pratiquement vide
+
+## 80%
+
+Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (Insuffisant), NA (non acquis)
+
+| Critère                    | Résultat | Commentaire |
+| -------------------------- | -------- | ----------- |
+| Avancement Obstacles       |          |             |
+| Avancement Joueur          |          |             |
+| Avancement Tirs            |          |             |
+| Avancement ennemis         |          |             |
+| Avancement score           |          |             |
+| Qualité Présentation       |          |             |
+| Qualité Commentaires       |          |             |
+| Qualité Conventions        |          |             |
+| POO                        |          |             |
+| Processus Journal          |          |             |
+| Processus Git              |          |             |
+| Processus Livraison        |          |             |
+| Expression User Stories    |          |             |
+| Expression Rapport Fome    |          |             |
+| Expression Rapport Contenu |          |             |
+| Ecologie (gitignore)       |          |             |
+| Comportement collectif     |          |             |
+| Comportement individuel    |          |             |
