@@ -17,6 +17,7 @@ namespace ShootMeUp
         private int _move;
         private const int HEIGHT = 79;
         private const int WIDTH = 62;
+        private int _hp = 3;
 
         // Constructeur
         public Enemy(int x, int y, string name)
@@ -38,6 +39,7 @@ namespace ShootMeUp
         public string Name { get { return _name; } }
 
         public int Move { get => _move; set => _move = value; }
+        public int Hp { get => _hp; set => _hp = value; }
 
         // Cette méthode calcule le nouvel état dans lequel le ship se trouve après
         // que 'interval' millisecondes se sont écoulées
@@ -46,6 +48,7 @@ namespace ShootMeUp
             _x += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             _y += 4;
             return _y >= AirSpace.HEIGHT + HEIGHT;
+
         }
     }
 }

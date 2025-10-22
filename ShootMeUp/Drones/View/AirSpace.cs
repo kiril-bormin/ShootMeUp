@@ -1,4 +1,4 @@
-using ShootMeUp;
+Ôªøusing ShootMeUp;
 using ShootMeUp.Helpers;
 using ShootMeUp.Properties;
 using System.Diagnostics.Metrics;
@@ -8,15 +8,15 @@ using System.Xml.Linq;
 
 namespace ShootMeUp
 {
-    // La classe AirSpace reprÈsente le territoire au dessus duquel les vaisseau peuvent voler
-    // Il s'agit d'un formulaire (une fenÍtre) qui montre une vue 2D depuis le cotÈ
+    // La classe AirSpace repr–πsente le territoire au dessus duquel les vaisseau peuvent voler
+    // Il s'agit d'un formulaire (une fen–∫tre) qui montre une vue 2D depuis le cot–π
 
     public partial class AirSpace : Form
     {
         public static readonly int WIDTH = 600;        // Dimensions of the airspace
         public static readonly int HEIGHT = 1000;
 
-        // La flotte est l'ensemble des ships qui Èvoluent dans notre espace aÈrien
+        // La flotte est l'ensemble des ships qui –πvoluent dans notre espace a–πrien
         private List<Player> fleet;
         private List<Enemy> enemy;
         private List<Missile> missile;
@@ -28,7 +28,7 @@ namespace ShootMeUp
         Brush groundBrush = new SolidBrush(Color.Blue);
         int scrollSmoother = 0;
 
-        // Initialisation de l'espace aÈrien avec un certain nombre de ships
+        // Initialisation de l'espace a–πrien avec un certain nombre de ships
         public AirSpace(List<Player> fleet, List<Enemy> enemy, List<Missile> missile)
         {
             InitializeComponent();
@@ -107,6 +107,8 @@ namespace ShootMeUp
             foreach (Enemy enemy_ship in enemy)
             {
                 enemy_ship.Render(airspace);
+                Console.WriteLine(enemy_ship.Hp);
+
             }
 
             foreach (Missile m in missile)
@@ -116,7 +118,7 @@ namespace ShootMeUp
 
 
 
-            //for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors Ècran
+            //for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors –πcran
             //{
             //    if (enemy[i].Update(32))
             //    {
@@ -127,7 +129,7 @@ namespace ShootMeUp
             //        enemy[i].Render(airspace);
             //    }
             //}
-            //for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors Ècran
+            //for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors –πcran
             //{
             //    if (missile[i].Update(32)) 
             //    {
@@ -155,7 +157,7 @@ namespace ShootMeUp
             airspace.Render();
         }
 
-        // Calcul du nouvel Ètat aprËs que 'interval' millisecondes se sont ÈcoulÈes
+        // Calcul du nouvel –πtat apr–∏s que 'interval' millisecondes se sont –πcoul–πes
         private void Update(int interval)
         {
             foreach (Player ship in fleet)
@@ -206,24 +208,26 @@ namespace ShootMeUp
         }
         private void CheckCollisions()
         {
-            HashSet<Missile> missilesToRemove = new HashSet<Missile>(); //Liste qui contient seulement des ?l?ments uniques 
-            HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>(); //Liste qui contient seulement des ?l?ments uniques 
+            HashSet<Missile> missilesToRemove = new HashSet<Missile>(); //Liste qui contient seulement des √©l√©ments uniques 
+            HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>(); //Liste qui contient seulement des √©l√©ments uniques 
 
             foreach (Missile m in missile)
             {
                 foreach (Enemy e in enemy)
                 {
-                    if (m.BoundingBox.IntersectsWith(e.BoundingBox)) //V?rification si les deux ?l?ments se croisent 
+                    if (m.BoundingBox.IntersectsWith(e.BoundingBox)) //V√©rification si les deux √©l√©ments se croisent 
                     {
-
-
+                        e.Hp -= 1;
+                        if (e.Hp == 0)
+                        {
+                            enemiesToRemove.Add(e);
+                        }
                         missilesToRemove.Add(m);
-                        //enemiesToRemove.Add(e);
                     }
                 }
             }
 
-            //Suppresion des ?l?ments qui n'ont plus de vies
+            //Suppresion des √©l√©ments qui n'ont plus de vies
             foreach (Missile m in missilesToRemove)
             {
                 missile.Remove(m);
@@ -234,13 +238,14 @@ namespace ShootMeUp
                 enemy.Remove(e);
             }
         }
-        // MÈthode appelÈe ‡ chaque frame
+        // M–πthode appel–πe –∞ chaque frame
         private void NewFrame(object sender, EventArgs e)
         {
             counter++;
             this.Update(ticker.Interval);
             this.Render();
             this.CheckCollisions();
+
         }
     }
 }

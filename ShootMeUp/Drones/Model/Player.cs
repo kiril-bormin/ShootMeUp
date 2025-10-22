@@ -15,6 +15,7 @@ namespace ShootMeUp
         private int _fire;                              //
         private const int HEIGHT = 79;
         private const int WIDTH = 62;
+        private int _hp = 5;
 
 
         // Constructeur
@@ -46,7 +47,6 @@ namespace ShootMeUp
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            Console.WriteLine(_chargesnow);
             _y += GlobalHelpers.alea.Next(-1, 2);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
             if (_y >= 886)
             {
