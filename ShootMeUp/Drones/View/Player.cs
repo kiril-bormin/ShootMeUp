@@ -23,7 +23,7 @@ namespace ShootMeUp
             {
                 drawingSpace.Graphics.DrawImage(Resources.ship, X, Y, WIDTH, HEIGHT);//48, 61 valeurs par défaut, multiplié par 1,3 pour avoir un bon taille
             }
-            drawingSpace.Graphics.DrawString(_name, TextHelpers.drawFont, TextHelpers.writingBrush, X + 30, Y - 25);
+            drawingSpace.Graphics.DrawString(_name, TextHelpers.drawFont, TextHelpers.writingBrush, X + 3, Y - 25);
         }
 
         // De manière textuelle
