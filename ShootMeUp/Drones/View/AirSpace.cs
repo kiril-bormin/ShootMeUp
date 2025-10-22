@@ -14,9 +14,9 @@ namespace ShootMeUp
     public partial class AirSpace : Form
     {
         public static readonly int WIDTH = 600;        // Dimensions of the airspace
-        public static readonly int HEIGHT = 1000;
+        public static readonly int HEIGHT = 1000; 
 
-        // La flotte est l'ensemble des ships qui йvoluent dans notre espace aйrien
+        // Les listes des objets qui sont présents dans l'espace 
         private List<Player> fleet; 
         private List<Enemy> enemy; 
         private List<Missile> missile;
@@ -24,14 +24,15 @@ namespace ShootMeUp
 
         private List<Image> backgroundImages;   // Liste pour les 4 images
         private List<int> backgroundYPositions; // Liste pour les positions des images 
+
         private int scrollSpeed = 2; // Vitesse de mouvement 
-        private int counter = 0;
+        private int counter = 0; // Le comptoir des frames 
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
         int[] ground = new int[WIDTH / 10+1];
         Brush groundBrush = new SolidBrush(Color.Blue);
-        int scrollSmoother = 0;
+        int scrollSmoother = 0; 
 
         // Initialisation de l'espace aйrien avec un certain nombre de ships
         public AirSpace(List<Player> fleet, List<Enemy> enemy, List<Missile> missile, List<Obstacle> obstacles)
@@ -44,10 +45,6 @@ namespace ShootMeUp
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             ground[0] = HEIGHT / 5;
 
-            //for (int i = 1; i < ground.Length; i++)
-            //{
-            //    ground[i] = ground[i-1] + GlobalHelpers.alea.Next(0, 7)-3;
-            //}
             ClientSize = new Size(WIDTH, HEIGHT);
             InitializeComponent();
 
@@ -124,73 +121,34 @@ namespace ShootMeUp
                 ship.Render(airspace);
 
             }
-            //foreach (Enemy enemy_ship in enemy)
-            //{
-            //    enemy_ship.Render(airspace);
-            //}
+            // Afficher les ennemies
             foreach (Enemy enemy_ship in enemy)
             {
                 enemy_ship.Render(airspace);
                 Console.WriteLine(enemy_ship.Hp);
             }
-
+            // Afficher les missiles
             foreach (Missile missile in missile)
             {
                 missile.Render(airspace);
             }
-            
+            // Afficher les obstacles
             foreach (Obstacle obstacle in obstacle)
             {
                 obstacle.Render(airspace);
             }
-
-
-
-            //for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors йcran
-            //{
-            //    if (enemy[i].Update(32))
-            //    {
-            //        enemy.RemoveAt(i);
-            //    }
-            //    else
-            //    {
-            //        enemy[i].Render(airspace);
-            //    }
-            //}
-            //for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors йcran
-            //{
-            //    if (missile[i].Update(32)) 
-            //    {
-            //        missile.RemoveAt(i);
-            //    }
-            //    else
-            //    {
-            //        missile[i].Render(airspace);
-            //    }
-            //}
-
             Interface(airspace);
-
-
-            //for (int i = 0; i < ground.Length; i++)
-            //{
-            //    airspace.Graphics.FillRectangle(groundBrush, new Rectangle(i * 10-scrollSmoother, HEIGHT - ground[i], 10, ground[i]));
-            //}
-            //scrollSmoother = (scrollSmoother + 5) % 10;
-            //if (scrollSmoother == 0)
-            //{
-            //    for (int i = 1;i < ground.Length; i++) ground[i-1] = ground[i];
-            //    ground[ground.Length - 1] = ground[ground.Length - 2] + GlobalHelpers.alea.Next(0, 7) - 3;
-            //}
             airspace.Render();
         }
 
         // Calcul du nouvel йtat aprиs que 'interval' millisecondes se sont йcoulйes
         private void Update(int interval)
         {
+            //Update la position du joueur
             foreach (Player ship in fleet)
             {
                 ship.Update(interval);
+                // Après 50 "ticks" (env. 5 seconds) ce code verifie si le joueur a 5 missiles en charge, sinon il lui en ajoute un de plus
                 if (counter % 50 == 0)
                 {
                     if (ship.Chargesnow >= 5)
@@ -203,14 +161,7 @@ namespace ShootMeUp
                     }
                 }
             }
-            //foreach (Enemy enemy_ship in enemy)
-            //{
-            //    enemy_ship.Update(interval);
-            //}
-            //foreach (Missile missile in missile)
-            //{
-            //    missile.Update(interval);
-            //}
+            // Update la position des ennemies 
             for (int i = enemy.Count - 1; i >= 0; i--)
             {
                 if (enemy[i].Update(interval)) 
@@ -218,7 +169,7 @@ namespace ShootMeUp
                     enemy.RemoveAt(i);
                 }
             }
-
+            // Update la position des missiles 
             for (int i = missile.Count - 1; i >= 0; i--)
             {
                 if (missile[i].Update(interval)) 
@@ -226,6 +177,7 @@ namespace ShootMeUp
                     missile.RemoveAt(i);
                 }
             }
+            // Update la position des obstacles (ils avancent en réalité) 
             for (int i = obstacle.Count - 1; i >= 0; i--)
             {
                 if (obstacle[i].Update(interval))
@@ -233,6 +185,7 @@ namespace ShootMeUp
                     obstacle.RemoveAt(i);
                 }
             }
+            // Update le fond du jeu
             for (int i = 0; i < backgroundImages.Count; i++)
             {
                 // On bouge l'image actuelle vers le bas
@@ -246,6 +199,10 @@ namespace ShootMeUp
                 }
             }
         }
+        /// <summary>
+        /// Interface du jeu, il affiche le nombre de missiles en haut à gauche de la fenêtre
+        /// </summary>
+        /// <param name="drawingSpace"></param>
         private void Interface(BufferedGraphics drawingSpace)
         {
             foreach (Player ship in fleet)
@@ -253,6 +210,10 @@ namespace ShootMeUp
                 drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
             }
         }
+        /// <summary>
+        /// S'applique quand le joueur était vaincu
+        /// </summary>
+        /// <param name="drawingSpace"></param>
         private void GameOver(BufferedGraphics drawingSpace)
         {
             foreach (Player ship in fleet) {
@@ -260,13 +221,16 @@ namespace ShootMeUp
                 drawingSpace.Graphics.DrawImage(Resources.game_over, 25, 35, 380, 84);
             }
         }
+        /// <summary>
+        /// Verifie si des objet se croisent, et si oui, il les supprimes
+        /// </summary>
         private void CheckCollisions()
         {
-            HashSet<Missile> missilesToRemove = new HashSet<Missile>(); //Liste qui contient seulement des éléments uniques 
+            // Listes qui contient seulement des éléments uniques à supprimer de la liste principale
+            HashSet<Missile> missilesToRemove = new HashSet<Missile>(); 
             HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>();  
             HashSet<Player> playerToRemove = new HashSet<Player>();
             HashSet<Obstacle> obstaclesToRemove = new HashSet<Obstacle>();
-
 
             // Collision d'un missile avec un avion ennemie
             foreach (Missile m in missile)
@@ -275,13 +239,12 @@ namespace ShootMeUp
                 {
                     if (m.BoundingBox.IntersectsWith(e.BoundingBox)) //Vérification si les deux éléments se croisent 
                     {
-                        e.Hp -= 1;
+                        e.Hp -= 1; // Soustraire un point de vie
                         if (e.Hp == 0)
                         {
-                            enemiesToRemove.Add(e);
+                            enemiesToRemove.Add(e); // Si l'ennemie n'a plus de points de vie, il est supprimé 
                         }
-                        missilesToRemove.Add(m);
-
+                        missilesToRemove.Add(m); // Le missile est supprimé à chaque fois
                     }
                 }
             }
@@ -292,12 +255,12 @@ namespace ShootMeUp
                 {
                     if (m.BoundingBox.IntersectsWith(o.BoundingBox)) //Vérification si les deux éléments se croisent 
                     {
-                        o.Hp -= 1;
+                        o.Hp -= 1;// Soustraire un point de vie
                         if (o.Hp == 0)
                         {
-                            obstaclesToRemove.Add(o);
+                            obstaclesToRemove.Add(o);// Si l'obstacle n'a plus de points de vie, il est supprimé 
                         }
-                        missilesToRemove.Add(m);
+                        missilesToRemove.Add(m);// Le missile est supprimé à chaque fois
 
                     }
                 }
@@ -311,9 +274,8 @@ namespace ShootMeUp
                     {
                         GameOver(airspace);
                         Console.WriteLine("Game Over");
-                        enemiesToRemove.Add(e);
-                        playerToRemove.Add(p);
-
+                        enemiesToRemove.Add(e); // Supprime l'ennemie
+                        playerToRemove.Add(p);// Supprime le joueur
                     }
                 }
             }
@@ -326,12 +288,11 @@ namespace ShootMeUp
                     {
                         GameOver(airspace);
                         Console.WriteLine("Game Over");
-                        obstaclesToRemove.Add(o);
-                        playerToRemove.Add(p);
+                        obstaclesToRemove.Add(o); // Supprime l'obstacle
+                        playerToRemove.Add(p);// Supprime le joueur
                     }
                 }
             }
-
             //Suppresion des éléments qui n'ont plus de vies
             foreach (Missile m in missilesToRemove)
             {
@@ -357,7 +318,6 @@ namespace ShootMeUp
             this.Update(ticker.Interval);
             this.Render();
             this.CheckCollisions();
-
         }
     }
 }
