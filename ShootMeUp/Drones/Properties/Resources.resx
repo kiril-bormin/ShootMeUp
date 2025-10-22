@@ -124,6 +124,9 @@
   <data name="fond" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\fond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="game_over" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game-over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="missile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\missile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -135,5 +138,17 @@
   </data>
   <data name="ship_left" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ship-left.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zone1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zone1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zone2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zone2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zone3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zone3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zone4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zone4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

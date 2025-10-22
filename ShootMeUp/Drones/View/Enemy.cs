@@ -11,7 +11,5 @@ namespace ShootMeUp
             drawingSpace.Graphics.DrawImage(Resources.enemy_ship, X, Y, WIDTH, HEIGHT);//48, 61 valeurs par défaut, multiplié par 1,3 pour avoir un bon taille
             drawingSpace.Graphics.DrawString(_name + " HP: " + _hp, TextHelpers.drawFont, TextHelpers.writingBrush, X - 20, Y - 25);
         }
-
-        // De manière textuelle
     }
 }

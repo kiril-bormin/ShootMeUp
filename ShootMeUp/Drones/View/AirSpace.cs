@@ -20,6 +20,9 @@ namespace ShootMeUp
         private List<Player> fleet;
         private List<Enemy> enemy;
         private List<Missile> missile;
+        private List<Image> backgroundImages;   // Liste pour les 4 images
+        private List<int> backgroundYPositions; // Liste pour les positions des images 
+        private int scrollSpeed = 3; // Vitesse de mouvement 
         private int counter = 0;
 
         BufferedGraphicsContext currentContext;
@@ -27,6 +30,7 @@ namespace ShootMeUp
         int[] ground = new int[WIDTH / 10+1];
         Brush groundBrush = new SolidBrush(Color.Blue);
         int scrollSmoother = 0;
+
 
         // Initialisation de l'espace aйrien avec un certain nombre de ships
         public AirSpace(List<Player> fleet, List<Enemy> enemy, List<Missile> missile)
@@ -45,6 +49,21 @@ namespace ShootMeUp
             //}
             ClientSize = new Size(WIDTH, HEIGHT);
             InitializeComponent();
+
+            backgroundImages = new List<Image>();
+            backgroundYPositions = new List<int>();
+
+            //Ajouter des fonds dans la liste
+            backgroundImages.Add(Properties.Resources.fond); 
+            backgroundImages.Add(Properties.Resources.fond); 
+            backgroundImages.Add(Properties.Resources.fond); 
+            backgroundImages.Add(Properties.Resources.fond);
+
+            // Placer les l'un sur l'autre
+            for (int i = 0; i < backgroundImages.Count; i++)
+            {
+                backgroundYPositions.Add(i * -HEIGHT);
+            }
 
             this.KeyPreview = true; // Ensures the form captures key events before child controls
             this.KeyDown += Form1_KeyDown;
@@ -93,12 +112,15 @@ namespace ShootMeUp
         {
             //fond du jeu
             //airspace.Graphics.Clear(Color.AliceBlue);
-            airspace.Graphics.DrawImage(Resources.fond, 0, 0, WIDTH, HEIGHT);
-
+            for (int i = 0; i < backgroundImages.Count; i++)
+            {
+                airspace.Graphics.DrawImage(backgroundImages[i], 0, backgroundYPositions[i], WIDTH, HEIGHT);
+            }
             // draw ships
             foreach (Player ship in fleet)
             {
                 ship.Render(airspace);
+
             }
             //foreach (Enemy enemy_ship in enemy)
             //{
@@ -198,6 +220,18 @@ namespace ShootMeUp
                     missile.RemoveAt(i);
                 }
             }
+            for (int i = 0; i < backgroundImages.Count; i++)
+            {
+                // On bouge l'image actuelle vers le bas
+                backgroundYPositions[i] += scrollSpeed;
+
+                // Quand l'image quite completement l'ecran, on la déplace vers le haut
+                if (backgroundYPositions[i] >= HEIGHT)
+                {
+                    int topMostY = backgroundYPositions.Min();
+                    backgroundYPositions[i] = topMostY - HEIGHT;
+                }
+            }
         }
         private void Interface(BufferedGraphics drawingSpace)
         {
@@ -206,10 +240,18 @@ namespace ShootMeUp
                 drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
             }
         }
+        private void GameOver(BufferedGraphics drawingSpace)
+        {
+            foreach (Player ship in fleet) {
+
+                drawingSpace.Graphics.DrawImage(Resources.game_over, 25, 35, 380, 84);
+            }
+        }
         private void CheckCollisions()
         {
             HashSet<Missile> missilesToRemove = new HashSet<Missile>(); //Liste qui contient seulement des éléments uniques 
-            HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>(); //Liste qui contient seulement des éléments uniques 
+            HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>();  
+            HashSet<Player> playerToRemove = new HashSet<Player>(); 
 
             foreach (Missile m in missile)
             {
@@ -227,6 +269,21 @@ namespace ShootMeUp
                 }
             }
 
+            foreach (Player p in fleet)
+            {
+                foreach (Enemy e in enemy)
+                {
+                    if (p.BoundingBox.IntersectsWith(e.BoundingBox)) //Vérification si les deux éléments se croisent 
+                    {
+                        GameOver(airspace);
+                        Console.WriteLine("Game Over");
+                        enemiesToRemove.Add(e);
+                        playerToRemove.Add(p);
+
+                    }
+                }
+            }
+
             //Suppresion des éléments qui n'ont plus de vies
             foreach (Missile m in missilesToRemove)
             {
@@ -236,6 +293,10 @@ namespace ShootMeUp
             foreach (Enemy e in enemiesToRemove)
             {
                 enemy.Remove(e);
+            }
+            foreach (Player p in playerToRemove)
+            {
+                fleet.Remove(p);
             }
         }
         // Mйthode appelйe а chaque frame

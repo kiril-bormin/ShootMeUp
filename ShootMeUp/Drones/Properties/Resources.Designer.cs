@@ -83,6 +83,16 @@ namespace ShootMeUp.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap game_over {
+            get {
+                object obj = ResourceManager.GetObject("game_over", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap missile {
             get {
                 object obj = ResourceManager.GetObject("missile", resourceCulture);
@@ -116,6 +126,46 @@ namespace ShootMeUp.Properties {
         internal static System.Drawing.Bitmap ship_right {
             get {
                 object obj = ResourceManager.GetObject("ship-right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zone1 {
+            get {
+                object obj = ResourceManager.GetObject("zone1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zone2 {
+            get {
+                object obj = ResourceManager.GetObject("zone2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zone3 {
+            get {
+                object obj = ResourceManager.GetObject("zone3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zone4 {
+            get {
+                object obj = ResourceManager.GetObject("zone4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
