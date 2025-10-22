@@ -27,6 +27,11 @@ namespace ShootMeUp
             _name = name;
             _chargesnow = CHARGES; // La charge initiale de la batterie est choisie aléatoirement
         }
+        // Crée un rectangle invisible pour définir la taille de hitbox d'objet 
+        public Rectangle BoundingBox
+        {
+            get { return new Rectangle(X, Y, WIDTH, HEIGHT); }
+        }
         public int X { get { return _x;} }
         public int Y { get { return _y;} }
         public void setX(int x) { _x = x; }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
+
 
 namespace ShootMeUp
 {
@@ -23,6 +25,11 @@ namespace ShootMeUp
             _x = x;
             _y = y;
             _name = name;
+        }
+        // Crée un rectangle invisible pour définir la taille de hitbox de l'objet 
+        public Rectangle BoundingBox
+        {
+            get { return new Rectangle(X, Y, WIDTH, HEIGHT); }
         }
         public int X { get { return _x; } }
         public int Y { get { return _y; } }

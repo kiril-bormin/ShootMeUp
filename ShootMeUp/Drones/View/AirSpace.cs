@@ -104,28 +104,40 @@ namespace ShootMeUp
             //{
             //    enemy_ship.Render(airspace);
             //}
-            for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors écran
+            foreach (Enemy enemy_ship in enemy)
             {
-                if (enemy[i].Update(32))
-                {
-                    enemy.RemoveAt(i);
-                }
-                else
-                {
-                    enemy[i].Render(airspace);
-                }
+                enemy_ship.Render(airspace);
             }
-            for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors écran
+
+            foreach (Missile m in missile)
             {
-                if (missile[i].Update(32)) 
-                {
-                    missile.RemoveAt(i);
-                }
-                else
-                {
-                    missile[i].Render(airspace);
-                }
+                m.Render(airspace);
             }
+
+
+
+            //for (int i = enemy.Count - 1; i >= 0; i--)// Boucle pour appeler le methode Update dans la classe Enemy, et supprimer si hors écran
+            //{
+            //    if (enemy[i].Update(32))
+            //    {
+            //        enemy.RemoveAt(i);
+            //    }
+            //    else
+            //    {
+            //        enemy[i].Render(airspace);
+            //    }
+            //}
+            //for (int i = missile.Count - 1; i >= 0; i--) // Boucle pour appeler le methode Update dans la classe Missile, et supprimer si hors écran
+            //{
+            //    if (missile[i].Update(32)) 
+            //    {
+            //        missile.RemoveAt(i);
+            //    }
+            //    else
+            //    {
+            //        missile[i].Render(airspace);
+            //    }
+            //}
 
             Interface(airspace);
 
@@ -161,15 +173,29 @@ namespace ShootMeUp
                     }
                 }
             }
-            foreach (Enemy enemy_ship in enemy)
+            //foreach (Enemy enemy_ship in enemy)
+            //{
+            //    enemy_ship.Update(interval);
+            //}
+            //foreach (Missile missile in missile)
+            //{
+            //    missile.Update(interval);
+            //}
+            for (int i = enemy.Count - 1; i >= 0; i--)
             {
-                enemy_ship.Update(interval);
-            }
-            foreach (Missile missile in missile)
-            {
-                missile.Update(interval);
+                if (enemy[i].Update(interval)) 
+                {
+                    enemy.RemoveAt(i);
+                }
             }
 
+            for (int i = missile.Count - 1; i >= 0; i--)
+            {
+                if (missile[i].Update(interval)) 
+                {
+                    missile.RemoveAt(i);
+                }
+            }
         }
         private void Interface(BufferedGraphics drawingSpace)
         {
@@ -178,13 +204,43 @@ namespace ShootMeUp
                 drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
             }
         }
+        private void CheckCollisions()
+        {
+            HashSet<Missile> missilesToRemove = new HashSet<Missile>(); //Liste qui contient seulement des ?l?ments uniques 
+            HashSet<Enemy> enemiesToRemove = new HashSet<Enemy>(); //Liste qui contient seulement des ?l?ments uniques 
+
+            foreach (Missile m in missile)
+            {
+                foreach (Enemy e in enemy)
+                {
+                    if (m.BoundingBox.IntersectsWith(e.BoundingBox)) //V?rification si les deux ?l?ments se croisent 
+                    {
+
+
+                        missilesToRemove.Add(m);
+                        //enemiesToRemove.Add(e);
+                    }
+                }
+            }
+
+            //Suppresion des ?l?ments qui n'ont plus de vies
+            foreach (Missile m in missilesToRemove)
+            {
+                missile.Remove(m);
+            }
+
+            foreach (Enemy e in enemiesToRemove)
+            {
+                enemy.Remove(e);
+            }
+        }
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)
         {
             counter++;
             this.Update(ticker.Interval);
             this.Render();
-
+            this.CheckCollisions();
         }
     }
 }

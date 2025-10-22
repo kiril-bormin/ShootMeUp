@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Drawing;
 
 namespace ShootMeUp
 {
@@ -20,6 +21,11 @@ namespace ShootMeUp
         {
             _x = x;
             _y = y;
+        }
+        // Crée un rectangle invisible pour définir la taille de hitbox d'objet 
+        public Rectangle BoundingBox
+        {
+            get { return new Rectangle(X, Y, WIDTH, HEIGHT); }
         }
         public int X { get { return _x; } }
         public int Y { get { return _y; } }
