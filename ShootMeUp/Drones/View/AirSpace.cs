@@ -24,7 +24,7 @@ namespace ShootMeUp
 
         private List<Image> backgroundImages;   // Liste pour les 4 images
         private List<int> backgroundYPositions; // Liste pour les positions des images 
-        private int scrollSpeed = 1; // Vitesse de mouvement 
+        private int scrollSpeed = 2; // Vitesse de mouvement 
         private int counter = 0;
 
         BufferedGraphicsContext currentContext;

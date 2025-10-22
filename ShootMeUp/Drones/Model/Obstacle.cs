@@ -14,8 +14,8 @@ namespace ShootMeUp
         private string _name;
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
-        private const int HEIGHT = 79;
-        private const int WIDTH = 62;
+        private const int HEIGHT = 153;
+        private const int WIDTH = 30;
         private int _hp = 3;
 
         // Constructeur
@@ -42,7 +42,7 @@ namespace ShootMeUp
         // que 'interval' millisecondes se sont écoulées
         public bool Update(int interval)
         {
-            _y += 1;
+            _y += 2;
             return _y >= AirSpace.HEIGHT + HEIGHT;
         }
     }
