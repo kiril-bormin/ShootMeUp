@@ -59,12 +59,15 @@ namespace ShootMeUp
             {
                 switch (e.KeyCode)
                 {
+                    case Keys.A:
                     case Keys.Left:
                         ship.Move = -4;
                         break;
+                    case Keys.D:
                     case Keys.Right:
                         ship.Move = 4;
                         break;
+                    case Keys.W:
                     case Keys.Up:
                         ship.Move = 0;
                         break;
