@@ -27,6 +27,9 @@ namespace ShootMeUp
 
         private int scrollSpeed = 2; // Vitesse de mouvement 
         private int counter = 0; // Le comptoir des frames 
+        private int nextSpawnCounter;
+        private int nextSpawnCounterObstacle;
+
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -71,6 +74,9 @@ namespace ShootMeUp
             this.missile = missile;
             this.enemy = enemy;
             this.obstacle = obstacles;
+
+            int firstInterval = GlobalHelpers.alea.Next(1, 4) * 100; 
+            nextSpawnCounter = firstInterval;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -171,22 +177,31 @@ namespace ShootMeUp
                 }
             }
             // Spawn les ennemies
-            if (counter % GlobalHelpers.alea.Next(100, 250) == 0)
+            if (counter >= nextSpawnCounter)
             {
                 int enemyX = GlobalHelpers.alea.Next(50, AirSpace.WIDTH - Enemy.WIDTH - 50); // X de l'ennemie est un nombre aléatoire entre 50 et 1000 - taille de l'ennemie - 50
                 int enemyY = -Enemy.HEIGHT; // Y de l'ennemie => 0 - sa taille 
-
                 // ajouter l'ennemie dans la liste
                 enemy.Add(new Enemy(enemyX, enemyY, "F16"));
+
+                // Timer qui est un multiple de 100 
+                int randomInterval = GlobalHelpers.alea.Next(1, 4) * 100;
+
+                //On définit le prochain spawn 
+                nextSpawnCounter = counter + randomInterval;
             }
-            // Spawn les ennemies
-            if (counter % GlobalHelpers.alea.Next(100, 250) == 0)
+            // Spawn les obstacles
+            if (counter >= nextSpawnCounterObstacle)
             {
                 int obstacleX = GlobalHelpers.alea.Next(50, AirSpace.WIDTH - Obstacle.WIDTH - 50); // X de l'obstacle est un nombre aléatoire entre 50 et 1000 - taille de l'obstacle - 50
                 int obstacleY = -Obstacle.HEIGHT; // Y de l'obstacle => 0 - sa taille 
-
                 // ajouter l'obstacle dans la liste
                 obstacle.Add(new Obstacle(obstacleX, obstacleY, "Tour"));
+
+                int randomInterval = GlobalHelpers.alea.Next(1, 4) * 100;
+
+                //On définit le prochain spawn 
+                nextSpawnCounterObstacle = counter + randomInterval;
             }
 
             // Update la position des missiles 
