@@ -25,7 +25,8 @@ namespace ShootMeUp
             List<Missile> missile = new List<Missile>();
 
             List<Obstacle> obstacle = new List<Obstacle>();
-            obstacle.Add(new Obstacle(AirSpace.WIDTH / 2 + 40, 100, "Tour"));
+            obstacle.Add(new Obstacle(GlobalHelpers.alea.Next(50, AirSpace.WIDTH - 50), 0, "Tour"));
+            
 
             // Démarrage
             Application.Run(new AirSpace(fleet, enemy, missile, obstacle));

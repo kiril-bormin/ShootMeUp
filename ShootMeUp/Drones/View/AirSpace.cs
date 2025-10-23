@@ -32,7 +32,9 @@ namespace ShootMeUp
         BufferedGraphics airspace;
         int[] ground = new int[WIDTH / 10+1];
         Brush groundBrush = new SolidBrush(Color.Blue);
-        int scrollSmoother = 0; 
+        int scrollSmoother = 0;
+
+        public int Counter { get => counter; set => counter = value; }
 
         // Initialisation de l'espace aйrien avec un certain nombre de ships
         public AirSpace(List<Player> fleet, List<Enemy> enemy, List<Missile> missile, List<Obstacle> obstacles)
@@ -119,7 +121,6 @@ namespace ShootMeUp
             foreach (Player ship in fleet)
             {
                 ship.Render(airspace);
-
             }
             // Afficher les ennemies
             foreach (Enemy enemy_ship in enemy)
@@ -169,6 +170,25 @@ namespace ShootMeUp
                     enemy.RemoveAt(i);
                 }
             }
+            // Spawn les ennemies
+            if (counter % GlobalHelpers.alea.Next(100, 250) == 0)
+            {
+                int enemyX = GlobalHelpers.alea.Next(50, AirSpace.WIDTH - Enemy.WIDTH - 50); // X de l'ennemie est un nombre aléatoire entre 50 et 1000 - taille de l'ennemie - 50
+                int enemyY = -Enemy.HEIGHT; // Y de l'ennemie => 0 - sa taille 
+
+                // ajouter l'ennemie dans la liste
+                enemy.Add(new Enemy(enemyX, enemyY, "F16"));
+            }
+            // Spawn les ennemies
+            if (counter % GlobalHelpers.alea.Next(100, 250) == 0)
+            {
+                int obstacleX = GlobalHelpers.alea.Next(50, AirSpace.WIDTH - Obstacle.WIDTH - 50); // X de l'obstacle est un nombre aléatoire entre 50 et 1000 - taille de l'obstacle - 50
+                int obstacleY = -Obstacle.HEIGHT; // Y de l'obstacle => 0 - sa taille 
+
+                // ajouter l'obstacle dans la liste
+                obstacle.Add(new Obstacle(obstacleX, obstacleY, "Tour"));
+            }
+
             // Update la position des missiles 
             for (int i = missile.Count - 1; i >= 0; i--)
             {
@@ -185,6 +205,7 @@ namespace ShootMeUp
                     obstacle.RemoveAt(i);
                 }
             }
+
             // Update le fond du jeu
             for (int i = 0; i < backgroundImages.Count; i++)
             {
