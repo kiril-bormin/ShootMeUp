@@ -16,6 +16,7 @@ namespace ShootMeUp
         private const int HEIGHT = 79;
         private const int WIDTH = 62;
         private int _hp = 5;
+        private int _score = 0;
 
 
         // Constructeur
@@ -42,6 +43,7 @@ namespace ShootMeUp
         public int Move { get => _move; set => _move = value; }
         public int Fire { get => _fire; set => _fire = value; }
         public int Chargesnow { get => _chargesnow; set => _chargesnow = value; }
+        public int Score { get => _score; set => _score = value; }
 
         // Cette méthode calcule le nouvel état dans lequel le ship se trouve après
         // que 'interval' millisecondes se sont écoulées

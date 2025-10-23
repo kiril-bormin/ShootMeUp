@@ -229,6 +229,8 @@ namespace ShootMeUp
             foreach (Player ship in fleet)
             {
                 drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
+                drawingSpace.Graphics.DrawString("Score : " + ship.Score, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 70);
+
             }
         }
         /// <summary>
@@ -264,6 +266,7 @@ namespace ShootMeUp
                         if (e.Hp == 0)
                         {
                             enemiesToRemove.Add(e); // Si l'ennemie n'a plus de points de vie, il est supprimé 
+                            fleet[0].Score++;
                         }
                         missilesToRemove.Add(m); // Le missile est supprimé à chaque fois
                     }
