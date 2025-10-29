@@ -25,7 +25,7 @@ namespace ShootMeUp
         private List<Image> backgroundImages;   // Liste pour les 4 images
         private List<int> backgroundYPositions; // Liste pour les positions des images 
 
-        private int scrollSpeed = 2; // Vitesse de mouvement 
+        private int scrollSpeed = 3; // Vitesse de mouvement 
         private int counter = 0; // Le comptoir des frames 
         private int nextSpawnCounter;
         private int nextSpawnCounterObstacle;
@@ -204,20 +204,20 @@ namespace ShootMeUp
                 nextSpawnCounterObstacle = counter + randomInterval;
             }
 
-            // Update la position des missiles 
-            for (int i = missile.Count - 1; i >= 0; i--)
-            {
-                if (missile[i].Update(interval)) 
-                {
-                    missile.RemoveAt(i);
-                }
-            }
             // Update la position des obstacles (ils avancent en réalité) 
             for (int i = obstacle.Count - 1; i >= 0; i--)
             {
                 if (obstacle[i].Update(interval))
                 {
                     obstacle.RemoveAt(i);
+                }
+            }
+            // Update la position des missiles 
+            for (int i = missile.Count - 1; i >= 0; i--)
+            {
+                if (missile[i].Update(interval)) 
+                {
+                    missile.RemoveAt(i);
                 }
             }
 
@@ -243,9 +243,8 @@ namespace ShootMeUp
         {
             foreach (Player ship in fleet)
             {
-                drawingSpace.Graphics.DrawString("Charge des missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
+                drawingSpace.Graphics.DrawString("Charge de missiles : " + ship.Chargesnow, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 35);
                 drawingSpace.Graphics.DrawString("Score : " + ship.Score, TextHelpers.drawFont, TextHelpers.writingBrush, 25, 70);
-
             }
         }
         /// <summary>

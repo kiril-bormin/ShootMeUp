@@ -42,7 +42,7 @@ namespace ShootMeUp
         // que 'interval' millisecondes se sont écoulées
         public bool Update(int interval)
         {
-            _y += 2;
+            _y += 3  ;
             return _y >= AirSpace.HEIGHT + HEIGHT;
         }
     }
