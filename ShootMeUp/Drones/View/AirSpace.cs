@@ -132,7 +132,6 @@ namespace ShootMeUp
             foreach (Enemy enemy_ship in enemy)
             {
                 enemy_ship.Render(airspace);
-                Console.WriteLine(enemy_ship.Hp);
             }
             // Afficher les missiles
             foreach (Missile missile in missile)
@@ -311,7 +310,6 @@ namespace ShootMeUp
                     if (p.BoundingBox.IntersectsWith(e.BoundingBox)) //Vérification si les deux éléments se croisent 
                     {
                         GameOver(airspace);
-                        Console.WriteLine("Game Over");
                         enemiesToRemove.Add(e); // Supprime l'ennemie
                         playerToRemove.Add(p);// Supprime le joueur
                     }
@@ -325,7 +323,6 @@ namespace ShootMeUp
                     if (p.BoundingBox.IntersectsWith(o.BoundingBox)) //Vérification si les deux éléments se croisent 
                     {
                         GameOver(airspace);
-                        Console.WriteLine("Game Over");
                         obstaclesToRemove.Add(o); // Supprime l'obstacle
                         playerToRemove.Add(p);// Supprime le joueur
                     }
