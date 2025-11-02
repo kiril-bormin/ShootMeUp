@@ -43,3 +43,15 @@ Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (I
 | Ecologie (gitignore)       | A        |                                                                                                                                                                                                                                                                                                   |
 | Comportement collectif     | A        |                                                                                                                                                                                                                                                                                                   |
 | Comportement individuel    | A        |                                                                                                                                                                                                                                                                                                   |
+
+## Final
+
+livraison, impeccable
+
+les points que je vous avais demandé de corriger à 80 % ont bien été traités.
+
+Attention quand même : le rapport est à la limite de l'insuffisant. Les objectifs pédagogiques et produits ne sont pas assez détaillés, les explications du diagramme UML ne donne pas d'informations utiles, elles répètent ce que l'on peut voir et comprendre du diagramme. La section sur l'IA est trop courte.
+
+Vous bénéficiez du fait que les attentes en terme de documentation étaient relativement basses.
+
+Votre projet est validé
